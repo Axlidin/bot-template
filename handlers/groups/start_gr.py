@@ -7,4 +7,4 @@ from loader import dp
 
 @dp.message_handler(IsGroup(), CommandStart())
 async def bot_start(message: types.Message):
-    await message.answer(f"Salom, {message.from_user.full_name}! siz guruhdasiz")
+    await message.answer(f"Salom, {message.from_user.get_mention()}! siz guruhdasiz")

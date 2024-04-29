@@ -24,17 +24,21 @@ async def bandMember(message: types.Message):
 @dp.message_handler(IsGroup(), Command('setPhoto', prefixes='!/'), IsAdmins())
 async def setPhoto(message: types.Message):
     source_msg = message.reply_to_message
+    # print(source_msg)
     photo = source_msg.photo[-1]
     photo = await photo.download(destination=io.BytesIO())
     input_file = types.InputFile(photo)
     # 1-usul
+    # await bot.set_chat_photo(photo=photo)
     await message.chat.set_photo(photo=input_file)
 
 @dp.message_handler(IsGroup(), Command('set_tittle', prefixes='!/'), IsAdmins())
 async def set_title(message: types.Message):
     sources_msg = message.reply_to_message
+    # print(sources_msg)
     title = sources_msg.text
     # 2-usul
+
     await bot.set_chat_title(message.chat.id, title=title)
 
 
@@ -45,4 +49,4 @@ async def set_description(message: types.Message):
     # 1-usul
     await message.chat.set_description(description=description)
     # 2-usul
-    await bot.set_chat_description(message.chat.id, description=description)
+    # await bot.set_chat_description(message.chat.id, description=description)
