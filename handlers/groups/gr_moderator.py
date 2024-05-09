@@ -16,6 +16,7 @@ async def read_only(message: types.Message):
     member = message.reply_to_message.from_user
     print(member)
     member_id = member.id
+    print(member_id)
     command_parse = re.compile(r'(!ro|/ro) ?(\d+)? ?([\w+\D]+)?')
     parsed = command_parse.match(message.text)
     print(parsed)
@@ -54,7 +55,7 @@ async def read_only(message: types.Message):
 
     # sabab
     await message.answer(f"Foydalanuvchi {message.reply_to_message.from_user.full_name} {time}"
-                         f" yozish huquqidan mahrum qilindi.\n"
+                         f" minut yozish huquqidan mahrum qilindi.\n"
                          f"Sabab: <b>{comment}</b>")
 
     izoh = await message.reply("Xabar 5 sekunda o'chib ketadi")
@@ -76,7 +77,7 @@ async def unro(message: types.Message):
         can_send_other_messages=True,
         can_add_web_page_previews=True,
         can_change_info=False,
-        can_invite_users=False,
+        can_invite_users=True,
         can_pin_messages=False,
     )
 
