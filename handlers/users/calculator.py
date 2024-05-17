@@ -1,8 +1,6 @@
 from aiogram import types
-
 from keyboards.inline.calculator_inline import buttons_menu
 from loader import dp, bot
-
 value = ''
 old_value = ''
 
@@ -29,10 +27,12 @@ async def hisblash(call: types.CallbackQuery):
 
     if value != old_value:
         if value == '':
-            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='0', reply_markup=buttons_menu)
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text='0', reply_markup=buttons_menu)
 
         else:
-            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=value, reply_markup=buttons_menu)
+            await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                        text=value, reply_markup=buttons_menu)
             old_value = value
 
     if value == 'Xatolik':
