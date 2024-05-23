@@ -2,10 +2,11 @@ from aiogram import types
 from aiogram.types import InputFile
 
 from keyboards.inline.send_keyboard import otm_keys
-from loader import dp
+from loader import dp, bot
 
 
 @dp.message_handler(content_types='photo')
+# @dp.message_handler(content_types=types.ContentType.PHOTO)
 async def get_photo(message: types.Message):
     print(message.photo[-1].file_id)
 
@@ -13,14 +14,19 @@ async def get_photo(message: types.Message):
 async def get_video(message: types.Message):
     print(message.video.file_id)
 
+@dp.message_handler(content_types=types.ContentType.DOCUMENT)
+async def get_any(message: types.Message):
+    print(message.document.file_id)
+
 @dp.message_handler(commands='kitoblarim')
 async def kitoblarim(message: types.Message):
     photo_id = 'AgACAgIAAxkBAAIJ5WZMtqWP2dmxWgABCe1a9m92oIlzLgACxeYxGyXQaEpyGivZe3nP0QEAAwIAA20AAzUE'
     photo_url = 'https://1.bp.blogspot.com/-_gie8qAwZPY/X0HgTfDEoMI/AAAAAAAAIjk/KsZvNYbtGHU6Dq9wi7koZ-QYfSLa8MgYwCLcBGAsYHQ/s1600/touchmaster_1598152338675.jpeg'
-    photo_input = InputFile('photos/python.jpg')
-    await message.reply_photo(photo=photo_id, caption="Kitoblarim")
-    await message.answer_photo(photo=photo_url, caption="Kitoblarim")
-    await message.answer_photo(photo=photo_input, caption="Kitoblarim")
+    photo_input = InputFile('photos/python.jpeg')
+    await message.reply_photo(photo=photo_id, caption="bu file_id orqali yuborildi")
+    await message.answer_photo(photo=photo_url, caption="bu file_url orqali yuborildi")
+    await message.answer_photo(photo=photo_input, caption="bu file orqali yuborildi")
+    await bot.send_photo(chat_id=message.from_user.id, photo=photo_id)
 
 
 @dp.message_handler(commands='kurslarim')
@@ -41,4 +47,5 @@ async def kurslarim(message: types.Message):
 async def adu(message: types.Message):
     photo_id = 'AgACAgIAAxkBAAIJ-2ZMy2oWa3tm18RnwELCzThp8boJAAKI5zEbJdBoShVTeUX4fSwoAQADAgADeQADNQQ'
     await message.answer_photo(photo=photo_id,
-                               caption="Siz o'zingiz uchun yaqin bo'lgan joyni aniqlashingiz mumkin", reply_markup=otm_keys)
+                               caption="Siz o'zingiz uchun yaqin bo'lgan joyni aniqlashingiz mumkin"
+                               , reply_markup=otm_keys)

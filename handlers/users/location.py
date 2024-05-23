@@ -14,6 +14,7 @@ async def show_location_keys(call: CallbackQuery):
 @dp.message_handler(content_types='location')
 async def get_location(message: Message):
     location = message.location
+    print(location)
     latitude = location.latitude
     longitude = location.longitude
 
