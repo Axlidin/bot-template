@@ -1,7 +1,6 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 
-from keyboards.default.entry_keyboards import entry_mainMenu
 from loader import dp
 
 
@@ -9,5 +8,22 @@ from loader import dp
 async def bot_start(message: types.Message):
     await message.answer(f"Assalomu alaykum Xush kelibsiz, {message.from_user.full_name}!\n"
                          f"Bizning online do'konimizga")
-    await message.answer("Foydalanish uchun pastdagi tugmalardan birini tanglang",
-                         reply_markup=entry_mainMenu)
+
+
+mahsulotlar = [
+    {
+        "id": 1,
+        "name": "Mahsulot 1",
+        "price": 1000
+    },
+    {
+        "id": 2,
+        "name": "Mahsulot 2",
+        "price": 2000
+    },
+    {
+        "id": 3,
+        "name": "Mahsulot 3",
+        "price": 3000
+    }
+]
